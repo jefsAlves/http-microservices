@@ -27,7 +27,7 @@ public class WorkersResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Workers>> findAll(List<Workers> workers) {
+	public ResponseEntity<List<Workers>> findAll(Workers workers) {
 		List<Workers> all = workersService.findAll(workers);
 		return ResponseEntity.ok().body(all);
 	}
