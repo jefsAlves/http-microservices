@@ -1,6 +1,7 @@
 package com.alvesjefs.hroauth.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationConfigServer extends AuthorizationServerConfigurerAdapter {
+
+	@Value("${oauth.client.name}")
+	private String userApp;
+
+	@Value("${oauth.client.secret}")
+	private String passUser;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -36,8 +43,8 @@ public class AuthorizationConfigServer extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient("MYAPP123")
-		.secret(bCryptPasswordEncoder.encode("MYSECRET123"))
+		.withClient(userApp)
+		.secret(bCryptPasswordEncoder.encode(passUser))
 		.authorizedGrantTypes("password")
 		.scopes("read", "write")
 		.refreshTokenValiditySeconds(86400);

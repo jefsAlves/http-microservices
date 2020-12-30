@@ -20,7 +20,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
 
 	private static final String[] OPERATOR = { "/hr-workers/**" };
 
-	private static final String[] ADM = { "/hr-payroll/**", "/hr-users/**" };
+	private static final String[] ADM = { "/hr-payroll/**", "/hr-users/**", "/actuator", "/hr-workers/actuator", "/hr-oauth/actuator" };
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
